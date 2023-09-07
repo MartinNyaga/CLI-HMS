@@ -85,6 +85,61 @@ def list_appointments():
     else:
         click.echo("No appointments found.")
 
+@cli.command()
+@click.option('--id', type=int, prompt='Doctor ID', help='ID of the doctor to update')
+@click.option('--name', prompt='New name', help='New name for the doctor')
+@click.option('--specialty', prompt='New specialty', help='New specialty for the doctor')
+def update_doctor(id, name, specialty):
+    """Update a doctor's information."""
+    doctor = session.query(Doctor).filter(Doctor.id == id).first()
+    if doctor:
+        doctor.name = name
+        doctor.specialty = specialty
+        session.commit()
+        click.echo(f'Doctor {id} updated successfully.')
+    else:
+        click.echo(f'Doctor with ID {id} not found.')
+
+@cli.command()
+@click.option('--id', type=int, prompt='Patient ID', help='ID of the patient to update')
+@click.option('--name', prompt='New name', help='New name for the patient')
+@click.option('--dob', prompt='New date of birth (YYYY-MM-DD)', help='New date of birth for the patient')
+@click.option('--gender', prompt='New gender', help='New gender for the patient')
+def update_patient(id, name, dob, gender):
+    """Update a patient's information."""
+    patient = session.query(Patient).filter(Patient.id == id).first()
+    if patient:
+        patient.name = name
+        
+        dob_date = datetime.strptime(dob, '%Y-%m-%d').date()
+        patient.dob = dob_date
+        
+        patient.gender = gender
+        session.commit()
+        click.echo(f'Patient {id} updated successfully.')
+    else:
+        click.echo(f'Patient with ID {id} not found.')
+
+@cli.command()
+@click.option('--id', type=int, prompt='Appointment ID', help='ID of the appointment to update')
+@click.option('--doctor-id', type=int, prompt='New Doctor ID', help='New doctor ID for the appointment')
+@click.option('--patient-id', type=int, prompt='New Patient ID', help='New patient ID for the appointment')
+@click.option('--appointment-date', prompt='New Appointment date (YYYY-MM-DD)', help='New appointment date')
+def update_appointment(id, doctor_id, patient_id, appointment_date):
+    """Update an appointment's information."""
+    appointment = session.query(Appointment).filter(Appointment.id == id).first()
+    if appointment:
+        appointment.doctor_id = doctor_id
+        appointment.patient_id = patient_id
+        
+        appointment_date = datetime.strptime(appointment_date, '%Y-%m-%d').date()
+        appointment.appointment_date = appointment_date
+        
+        session.commit()
+        click.echo(f'Appointment {id} updated successfully.')
+    else:
+        click.echo(f'Appointment with ID {id} not found.')
+
 
 if __name__ == '__main__':
     cli()
