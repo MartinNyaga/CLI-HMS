@@ -57,10 +57,10 @@ class Appointment(Base):
     patient = relationship('Patient', back_populates='appointments')
 
     def __init__(self, appointment_date, doctor_id, patient_id):
-        # Convert the 'appointment_date' string to a Python date object
+        
         if isinstance(appointment_date, str):
             self.appointment_date = datetime.strptime(appointment_date, '%Y-%m-%d').date()
         else:
-            self.appointment_date = appointment_date  # Assuming appointment_date is already a datetime.date object
+            self.appointment_date = appointment_date  
         self.doctor_id = doctor_id
         self.patient_id = patient_id

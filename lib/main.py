@@ -48,5 +48,43 @@ def add_appointment(doctor_id, patient_id, appointment_date):
     session.commit()
     click.echo('Appointment added to the database.')
 
+@cli.command()
+def list_doctors():
+    """List all doctors."""
+    doctors = session.query(Doctor).all()
+    if doctors:
+        click.echo("List of Doctors:")
+        for doctor in doctors:
+            click.echo(f"{doctor.id}: {doctor.name} ({doctor.specialty})")
+    else:
+        click.echo("No doctors found.")
+
+@cli.command()
+def list_patients():
+    """List all patients."""
+    patients = session.query(Patient).all()
+    if patients:
+        click.echo("List of Patients:")
+        for patient in patients:
+            click.echo(f"{patient.id}: {patient.name} (DOB: {patient.dob}, Gender: {patient.gender})")
+    else:
+        click.echo("No patients found.")
+
+@cli.command()
+def list_appointments():
+    """List all appointments."""
+    appointments = session.query(Appointment).all()
+    if appointments:
+        click.echo("List of Appointments:")
+        for appointment in appointments:
+            click.echo(f"Appointment ID: {appointment.id}")
+            click.echo(f"Doctor: {appointment.doctor.name}")
+            click.echo(f"Patient: {appointment.patient.name}")
+            click.echo(f"Date: {appointment.appointment_date}")
+            click.echo()
+    else:
+        click.echo("No appointments found.")
+
+
 if __name__ == '__main__':
     cli()
