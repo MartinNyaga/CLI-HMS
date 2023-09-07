@@ -1,5 +1,6 @@
 import click
 from models import session, Doctor, Patient, Appointment
+from datetime import datetime, date  
 
 @click.group()
 def cli():
@@ -21,7 +22,12 @@ def add_doctor(name, specialty):
 @click.option('--gender', prompt='Gender', help='Gender of the patient')
 def add_patient(name, dob, gender):
     """Add a new patient to the database."""
-    patient = Patient(name=name, dob=dob, gender=gender)
+    
+   
+    dob_date = datetime.strptime(dob, '%Y-%m-%d').date()
+
+    
+    patient = Patient(name=name, dob=dob_date, gender=gender)
     session.add(patient)
     session.commit()
     click.echo(f'Patient {name} added to the database.')
@@ -32,6 +38,11 @@ def add_patient(name, dob, gender):
 @click.option('--appointment-date', prompt='Appointment date (YYYY-MM-DD)', help='Date of the appointment')
 def add_appointment(doctor_id, patient_id, appointment_date):
     """Add a new appointment to the database."""
+    
+   
+    appointment_date = datetime.strptime(appointment_date, '%Y-%m-%d').date()
+
+    
     appointment = Appointment(doctor_id=doctor_id, patient_id=patient_id, appointment_date=appointment_date)
     session.add(appointment)
     session.commit()
