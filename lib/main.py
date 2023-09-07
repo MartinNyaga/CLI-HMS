@@ -140,6 +140,42 @@ def update_appointment(id, doctor_id, patient_id, appointment_date):
     else:
         click.echo(f'Appointment with ID {id} not found.')
 
+@cli.command()
+@click.option('--id', type=int, prompt='Doctor ID', help='ID of the doctor to delete')
+def delete_doctor(id):
+    """Delete a doctor from the database."""
+    doctor = session.query(Doctor).filter(Doctor.id == id).first()
+    if doctor:
+        session.delete(doctor)
+        session.commit()
+        click.echo(f'Doctor {id} deleted successfully.')
+    else:
+        click.echo(f'Doctor with ID {id} not found.')
+
+@cli.command()
+@click.option('--id', type=int, prompt='Patient ID', help='ID of the patient to delete')
+def delete_patient(id):
+    """Delete a patient from the database."""
+    patient = session.query(Patient).filter(Patient.id == id).first()
+    if patient:
+        session.delete(patient)
+        session.commit()
+        click.echo(f'Patient {id} deleted successfully.')
+    else:
+        click.echo(f'Patient with ID {id} not found.')
+
+@cli.command()
+@click.option('--id', type=int, prompt='Appointment ID', help='ID of the appointment to delete')
+def delete_appointment(id):
+    """Delete an appointment from the database."""
+    appointment = session.query(Appointment).filter(Appointment.id == id).first()
+    if appointment:
+        session.delete(appointment)
+        session.commit()
+        click.echo(f'Appointment {id} deleted successfully.')
+    else:
+        click.echo(f'Appointment with ID {id} not found.')
+
 
 if __name__ == '__main__':
     cli()
