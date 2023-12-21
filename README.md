@@ -45,7 +45,7 @@ No known bugs at the moment
 
 To make a contribution to the code used or any suggestions you can click on the contact link and email me your suggestions.
 
-- Email: martin.nyaga@student.moringaschool.com
+- Email: martinmugendi8@gmail.com
 
 ## License
 
