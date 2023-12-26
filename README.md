@@ -9,18 +9,70 @@
 ## Description
 This is a Hospital Management System python app that executed actions in the Command Line Interface. The database contains three different tables. The doctor table to store the doctor's information, The patient table to store patients data and the appointment table to store a booked appointment together with the doctor in charge and the patient who booked the appointment. Here the user is able to add, read, update or delete records from any of the tables listed through the CLI.
 
-## Screenshot 
-
-- CLI
-
-  <img src="./lib/screenshots/cli.png" alt="screenshot" />
-
-
-#### How to run code
+### How to run code
 - Git clone repo to your local
 - Open directory to file location
-- Run python3 lib/main.py on your terminal
-- Follow instructions on the terminal to perfom CRUD actions on the DataBase 
+- Move to lib directory
+- Run python3 main.py on your terminal to see available commands
+- Run python3 main.py followed by required command for execution i.e
+  ```bash
+  python3 main.py list-appointments 
+
+## CLI COMMANDS 
+
+- HELP
+  ```bash
+  --help   Show This message and exit
+
+- Add Appointment
+  ```bash
+  add-appointment     Add a new appointment to the database.
+
+- Add Doctor
+  ```bash
+  add-doctor          Add a new doctor to the database.
+
+- Add Patient
+  ```bash
+  add-patient         Add a new patient to the database.
+
+- Delete Appointment
+  ```bash
+  delete-appointment  Delete an appointment from the database.
+
+- Delete Doctor
+  ```bash
+  delete-doctor       Delete a doctor from the database.
+
+- Delete Patient
+  ```bash
+  delete-patient      Delete a patient from the database.
+
+- List Appointments
+  ```bash
+  list-appointments   List all appointments.
+
+- List Doctors
+  ```bash
+  list-doctors        List all doctors.
+
+- List Patients
+  ```bash
+  list-patients       List all patients.
+
+- Update Appointments
+  ```bash
+  update-appointment  Update an appointments information.
+
+- Update Doctor
+  ```bash
+  update-doctor       Update a doctors information.
+  
+- Update Patient
+  ```bash
+  update-patient      Update a patients information.
+
+
 
 ## Setup Requirements
 
